@@ -45,9 +45,7 @@
     <div class="form-group">
       <label for="subscriptionType">Subscription Type</label>
       <select id="subscriptionType" class="form-control" name="subscriptionType" [(ngModel)]="userSettings.subscriptionType">
-        <option>Monthly</option>
-        <option>Annual</option>
-        <option>Lifetime</option>
+        <option *ngFor="let type of subscriptionTypes | async">{{ type }}</option>
       </select>
     </div>
 
@@ -55,7 +53,9 @@
       <label for="notes">Notes</label>
       <textarea name="notes" class="form-control" id="notes" cols="30" rows="3" [(ngModel)]="userSettings.notes"></textarea>
     </div>
-
+    <div [hidden]="!postError" class="alert alert-danger">
+      {{ postErrorMessage }}
+    </div>
     <button class="btn btn-primary">Send</button>
   </form>
 </div>
